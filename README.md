@@ -25,8 +25,25 @@ python main.py
 ## Reference
 To read Reference, click link below :
 
-[Threshold_Otsu](https://Stackoverflow.com)
+</details>
 
-[Inpainting](https://docs.opencv.org/4.x/df/d3d/tutorial_py_inpainting.html)
+<details open>
+<summary>Reference</summary>
 
-[Dilation](https://viblo.asia/p/xu-ly-anh-erosion-dilation-opening-closing-4dbZNpWq5YM)
+
+- [Threshold_Otsu](https://Stackoverflow.com) 🌟 
+- [Inpainting](https://docs.opencv.org/4.x/df/d3d/tutorial_py_inpainting.html)  🌟 
+- [Dilation](https://viblo.asia/p/xu-ly-anh-erosion-dilation-opening-closing-4dbZNpWq5YM)  ⭐ 
+
+</details>
+
+## Contact
+<div align="center">
+   <a href="https://github.com/vu0607">
+   <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-github.png" width="5%"/>
+   </a>
+   <img width="2%" />
+   <a href="https://www.facebook.com/profile.php?id=100023231434513)">
+   <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-facebook.png" width="5%"/>
+   </a>
+
