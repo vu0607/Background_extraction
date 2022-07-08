@@ -18,7 +18,7 @@ git clone https://github.com/vu0607/Background_extraction.git
 To run tests, run the following command
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 
