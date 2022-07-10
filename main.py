@@ -1,37 +1,82 @@
 import cv2 as cv
 import numpy as np
 import os
+import argparse
 
-input_folder = r'sample/'
-result_folder = r'result/'
-def main():
-    def gray_img(img):  #Convert BGR_image to GRAY_image
-        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY) 
-        return gray
 
-    def threshold(gray_img): #Convert GRAY_image to Threshold_image 
-        thresh = cv.threshold(gray_img, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU)[1]
-        return thresh
+def parser_args():
+    """
+    Initiating argument parser
+    :return: args
+    """
+    parser = argparse.ArgumentParser(description='Input and Output Folder')
+    parser.add_argument('--input_folder', type=str, help='Name inputFolder')
+    parser.add_argument('--output_folder', type=str, help='Name outputFolder')
+    args = parser.parse_args()
+    return args
 
-    def dilation(thresh_img): # Dilate image
-        kernel_size = (5,5)
-        kernel = np.ones(kernel_size, "uint8")
-        mask = cv.dilate(thresh_img, kernel)
-        return mask
 
-    def inpaint(mask): # Inpaint image with mask
-        result_image = cv.inpaint(image,mask,7,cv.INPAINT_NS)
-        return result_image
+def cvt_bgr_to_gray_img(img: np.ndarray):
+    """
+    Converting BGR image to Gray image
+    :param img : np.ndarray
+    :return: gray_img
+    """
+    gray_img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+    return gray_img
 
-    for img in  os.listdir(input_folder): #Read image from folder and process
-        img_path = os.path.join(input_folder,img)
+
+def cvt_gray_to_threshold_img(gray_img: np.ndarray):
+    """
+    Converting Gray image to threshold image
+    :param gray_img : np.ndarray
+    :return: thresh_img
+    """
+    thresh_img = cv.threshold(gray_img, 0, 255, cv.THRESH_BINARY_INV + cv.THRESH_OTSU)[1]
+    return thresh_img
+
+
+def dilating_threshold(thresh_img: np.ndarray):  # Dilate image
+    """
+    Dilating threshold image
+    :param thresh_img : np.ndarray
+    :return: mask
+    """
+    kernel_size = (5, 5)
+    kernel = np.ones(kernel_size, "uint8")
+    mask = cv.dilate(thresh_img, kernel)
+    return mask
+
+
+def painting_image_with_mask(image: np.ndarray, mask: np.ndarray):  # In-paint image with mask
+    """
+    Painting image with mask
+    :param image: np.ndarray
+    :param mask: np.ndarray
+    :return: result_image
+    """
+    result_image = cv.inpaint(image, mask, 7, cv.INPAINT_NS)
+    return result_image
+
+
+def main(args):
+    """
+    Running main code
+    :param args
+    """
+    input_folder = args.inFolder
+    result_folder = args.outFolder
+    # print(args)
+    for img in os.listdir(input_folder):  # Read image from folder and process
+        img_path = os.path.join(input_folder, img)
         image = cv.imread(img_path)
-        result_image = inpaint(
-                                dilation(
-                                            threshold(
-                                                        gray_img(image))))
-        cv.imwrite(result_folder + str(img).strip('.jpg') + '.jpg', result_image)   #Save result_image to result_folder
+        result_image = painting_image_with_mask(image,
+                                                dilating_threshold(
+                                                    cvt_gray_to_threshold_img(
+                                                        cvt_bgr_to_gray_img(image))))
+        cv.imwrite(result_folder + '/' + str(img), result_image)  # Save result_image to result_folder
+
 
 if __name__ == '__main__':
-    main()
-
+    arg = parser_args()
+    main(arg)
