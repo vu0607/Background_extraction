@@ -1,10 +1,9 @@
-!results/.gitkeep
-!samples/.gitkeep
+
 results/*
 samples/*
 
-.idea/
-__pycache__/
+!results/.gitkeep
+!samples/.gitkeep
 
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm,images,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm,images,visualstudiocode
