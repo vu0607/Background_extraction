@@ -36,7 +36,7 @@ def cvt_gray_to_threshold_img(gray_img: np.ndarray):
     return thresh_img
 
 
-def dilating_threshold(thresh_img: np.ndarray):  # Dilate image
+def dilating_threshold(thresh_img: np.ndarray):
     """
     Dilating threshold image
     :param thresh_img : np.ndarray
@@ -48,7 +48,7 @@ def dilating_threshold(thresh_img: np.ndarray):  # Dilate image
     return mask
 
 
-def painting_image_with_mask(image: np.ndarray, mask: np.ndarray):  # In-paint image with mask
+def painting_image_with_mask(image: np.ndarray, mask: np.ndarray):
     """
     Painting image with mask
     :param image: np.ndarray
@@ -64,17 +64,16 @@ def main(args):
     Running main code
     :param args
     """
-    input_folder = args.inFolder
-    result_folder = args.outFolder
-    # print(args)
-    for img in os.listdir(input_folder):  # Read image from folder and process
+    input_folder = args.input_folder
+    result_folder = args.output_folder
+    for img in os.listdir(input_folder):
         img_path = os.path.join(input_folder, img)
         image = cv.imread(img_path)
         result_image = painting_image_with_mask(image,
                                                 dilating_threshold(
                                                     cvt_gray_to_threshold_img(
                                                         cvt_bgr_to_gray_img(image))))
-        cv.imwrite(result_folder + '/' + str(img), result_image)  # Save result_image to result_folder
+        cv.imwrite(result_folder + '/' + str(img), result_image)
 
 
 if __name__ == '__main__':
