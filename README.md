@@ -18,7 +18,7 @@ git clone https://github.com/vu0607/Background_extraction.git
 To run tests, run the following command
 
 ```bash
-python3 main.py --inFolder <name_inputFolder> --outFolder <name_outputFolder>
+python3 main.py --input_folder <name_inputFolder> --output_folder <name_outputFolder>
 ```
 
 
