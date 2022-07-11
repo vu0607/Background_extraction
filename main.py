@@ -87,7 +87,7 @@ def main(args):
         img_path = os.path.join(input_folder, img)
         image = cv.imread(img_path)
         result_image = extraction.extract(image)
-        cv.imwrite(result_folder + os.sep + img, result_image)
+        cv.imwrite(os.path.join(result_folder, img), result_image)
 
 
 if __name__ == '__main__':
